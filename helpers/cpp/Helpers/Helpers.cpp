@@ -53,6 +53,20 @@ class Helper {
     return numbersFloat;
   }
 
+  vector<double> readDoubleFile(string fileName) {
+    ifstream infile(fileName);
+    string line;
+    vector<double> numbersFloat;
+    while (getline(infile, line)) {
+      istringstream iss(line);
+      double n;
+      while (iss >> n) {
+        numbersFloat.push_back(n);
+      }
+    }
+    return numbersFloat;
+  }
+
   bool intFilesEqual(string file1, string file2) {
     vector<int> a = readIntFile(file1);
     vector<int> b = readIntFile(file2);
@@ -73,9 +87,3 @@ class Helper {
     return true;
   }
 };
-
-int main() {
-  Helper help = Helper();
-  // help.writeFile("text.txt", 10, 100, 1000);
-  cout << help.floatFilesEqual("text.txt", "text2.txt");
-}
