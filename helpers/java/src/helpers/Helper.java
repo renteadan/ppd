@@ -60,13 +60,39 @@ public class Helper {
 				return numbers.toArray(new Float[0]);
 		}
 
+		private Double[] stringToDouble(String s) {
+				String[] arr = s.split(" ");
+				Vector<Double> numbers = new Vector<>();
+				for(String str: arr) {
+						Double aux = Double.parseDouble(str);
+						numbers.add(aux);
+				}
+				return numbers.toArray(new Double[0]);
+		}
+
 		public Float[] readFileFloat(String fileName) {
 				Float[] arr = new Float[0];
+				int i=0;
 				try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
 						while (br.ready()) {
 								String a = br.readLine();
 								a = a.strip();
 								arr = stringToFloat(a);
+						}
+				} catch (IOException e) {
+						e.printStackTrace();
+				}
+				return arr;
+		}
+
+		public Double[] readFileDouble(String fileName) {
+				Double[] arr = new Double[0];
+				int i=0;
+				try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+						while (br.ready()) {
+								String a = br.readLine();
+								a = a.strip();
+								arr = stringToDouble(a);
 						}
 				} catch (IOException e) {
 						e.printStackTrace();

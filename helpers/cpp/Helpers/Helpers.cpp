@@ -13,7 +13,7 @@ using namespace std;
 
 class Helper {
  public:
-  void writeIntFile(string fileName, int min, int max, int size) {
+  void writeFile(string fileName, int min, int max, int size) {
     ofstream file(fileName);
     srand((unsigned)time(0));
     for (int i = 0; i < size; i++) {
@@ -76,6 +76,6 @@ class Helper {
 
 int main() {
   Helper help = Helper();
-  // help.writeIntFile("text.txt", 10, 100, 1000);
+  // help.writeFile("text.txt", 10, 100, 1000);
   cout << help.floatFilesEqual("text.txt", "text2.txt");
 }

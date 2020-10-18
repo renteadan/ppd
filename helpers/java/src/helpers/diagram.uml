@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="0.0">helpers.Helper</node>
+    <node x="49.0" y="235.0">helpers.Main</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="helpers.Main" target="helpers.Helper">
+      <point x="-37.25" y="-26.5" />
+      <point x="86.25" y="210.0" />
+      <point x="61.75" y="210.0" />
+      <point x="-61.75" y="92.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="451.5" y="208.0" />
+  <SelectedNodes>
+    <node>helpers.Helper</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
