@@ -12,16 +12,16 @@ class Utils {
  private:
   Matrix mat, filter;
   Helper help;
-  bool newFile = true;
   void createFilter(int i, int j);
   void createMatrix(int i, int j, string file);
   nanoseconds filterLinearDuration();
   nanoseconds filterParallelDuration(int threads);
-  long long averageParallel(int threads, int n);
-  long long averageLinear(int n);
-  void printComparisons(long long linear, long long parallel);
+  unsigned long long averageParallel(int threads, int n);
+  unsigned long long averageLinear(int n);
+  void printComparisons(unsigned long long linear, unsigned long long parallel);
  public:
   Utils();
+  bool newFile = true;
   void createFile(int size);
   void allTest2();
   void allTest3();

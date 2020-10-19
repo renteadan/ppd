@@ -15,7 +15,7 @@ using namespace std;
     for (int a = start; a < stop; a++) {
       int i = a / res.cols;
       int j = a % res.cols;
-      res.matrix[i][j] = applyFilter(filter, i, j);
+      res.matrix[i][j] = applyFilter(ref(filter), i, j);
     }
   }
 
@@ -50,7 +50,7 @@ using namespace std;
     return matrix[i][j];
   }
 
-  double Matrix::applyFilter(Matrix filter, int i, int j) {
+  double Matrix::applyFilter(Matrix& filter, int i, int j) {
     int n = filter.lines;
     int m = filter.cols;
     int startY = max(0, i - n / 2);
@@ -72,17 +72,17 @@ using namespace std;
     return aux;
   }
 
-  Matrix Matrix::filterMatrix(Matrix filter) {
+  Matrix Matrix::filterMatrix(Matrix& filter) {
     Matrix aux = Matrix(lines, cols);
     for (int i = 0; i < lines; i++) {
       for (int j = 0; j < cols; j++) {
-        aux.matrix[i][j] = applyFilter(filter, i, j);
+        aux.matrix[i][j] = applyFilter(ref(filter), i, j);
       }
     }
     return aux;
   }
 
-  Matrix Matrix::filterMatrixParallel(Matrix filter, int nrThreads) {
+  Matrix Matrix::filterMatrixParallel(Matrix& filter, int nrThreads) {
     vector<thread> threads(nrThreads);
     Matrix aux = Matrix(lines, cols);
     int m = cols * lines;

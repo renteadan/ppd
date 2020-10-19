@@ -22,7 +22,7 @@ public class Test {
 
 		private void createMatrix(int i, int j, String file) {
 				mat = new Matrix(i, j);
-				Double[] a = help.readFileDouble("date.txt");
+				Double[] a = help.readFileDouble(file);
 				mat.setMatrixFromArray(a);
 		}
 

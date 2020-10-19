@@ -62,7 +62,7 @@ nanoseconds Utils::filterParallelDuration(int threads) {
   return duration;
 }
 
-long long Utils::averageParallel(int threads, int n) {
+unsigned long long Utils::averageParallel(int threads, int n) {
   nanoseconds sum;
   for (int i = 0; i < n; i++) {
     nanoseconds duration = filterParallelDuration(threads);
@@ -71,7 +71,7 @@ long long Utils::averageParallel(int threads, int n) {
   return sum.count() / n;
 }
 
-long long Utils::averageLinear(int n) {
+unsigned long long Utils::averageLinear(int n) {
   nanoseconds sum;
   for (int i = 0; i < n; i++) {
     nanoseconds duration = filterLinearDuration();
@@ -86,8 +86,8 @@ void Utils::test1(int threads) {
   createFile(n * m);
   createFilter(3, 3);
   createMatrix(n, m, "date.txt");
-  long long lin = averageLinear(5);
-  long long par = averageParallel(4, 5);
+  unsigned long long lin = averageLinear(5);
+  unsigned long long par = averageParallel(4, 5);
   printComparisons(lin, par);
 }
 
@@ -97,8 +97,8 @@ void Utils::test2(int threads) {
   if (newFile) createFile(n * m);
   createFilter(5, 5);
   createMatrix(n, m, "date.txt");
-  long lin = averageLinear(5);
-  long par = averageParallel(4, 5);
+  unsigned long long lin = averageLinear(5);
+  unsigned long long par = averageParallel(4, 5);
   printComparisons(lin, par);
 }
 
@@ -108,8 +108,8 @@ void Utils::test3(int threads) {
   if (newFile) createFile(n * m);
   createFilter(5, 5);
   createMatrix(n, m, "date.txt");
-  long lin = averageLinear(5);
-  long par = averageParallel(4, 5);
+  unsigned long long lin = averageLinear(5);
+  unsigned long long par = averageParallel(4, 5);
   printComparisons(lin, par);
 }
 
@@ -119,12 +119,13 @@ void Utils::test4(int threads) {
   if (newFile) createFile(n * m);
   createFilter(5, 5);
   createMatrix(n, m, "date.txt");
-  long lin = averageLinear(5);
-  long par = averageParallel(4, 5);
+  unsigned long long lin = averageLinear(5);
+  unsigned long long par = averageParallel(4, 5);
   printComparisons(lin, par);
 }
 
-void Utils::printComparisons(long long linear, long long parallel) {
+void Utils::printComparisons(unsigned long long linear,
+                             unsigned long long parallel) {
   cout << "Linear=" << linear << "\n";
   cout << "Parallel=" << parallel << "\n";
   if (linear < parallel)
