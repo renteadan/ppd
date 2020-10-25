@@ -2,7 +2,11 @@
 
 #include "Utils.h"
 
-Utils::Utils() : mat(Matrix(0, 0)), filter(Matrix(0, 0)) {}
+Utils::Utils()
+    : mat(Matrix(0, 0)),
+      filter(Matrix(0, 0)),
+      resLinear(Matrix(0, 0)),
+      resParallel(Matrix(0, 0)) {}
 
 void Utils::createFilter(int i, int j) {
   filter = Matrix(i, j);
@@ -40,7 +44,7 @@ void Utils::allTest4() {
 
 int64_t Utils::filterLinearDuration() {
   auto start_t = high_resolution_clock::now();
-  mat.filterMatrix(filter);
+  resLinear = mat.filterMatrix(ref(filter));
   auto end_t = high_resolution_clock::now();
   auto duration = duration_cast<nanoseconds>(end_t - start_t);
   return duration.count();
@@ -48,7 +52,7 @@ int64_t Utils::filterLinearDuration() {
 
 int64_t Utils::filterParallelDuration(int threads) {
   auto start_t = high_resolution_clock::now();
-  mat.filterMatrixParallel(filter, threads);
+  resParallel.filterMatrixParallel(ref(filter), threads);
   auto end_t = high_resolution_clock::now();
   auto duration = duration_cast<nanoseconds>(end_t - start_t);
   return duration.count();
@@ -57,6 +61,7 @@ int64_t Utils::filterParallelDuration(int threads) {
 int64_t Utils::averageParallel(int threads, int n) {
   int64_t sum = 0;
   for (int i = 0; i < n; i++) {
+    mat.deepCopy(ref(resParallel));
     int64_t duration = filterParallelDuration(threads);
     sum += duration;
   }
@@ -77,8 +82,10 @@ void Utils::test1(int threads) {
   int n = 10, m = 10;
   createFilter(3, 3);
   createMatrix(n, m, "test1.txt");
-  unsigned long long lin = averageLinear(5);
-  unsigned long long par = averageParallel(threads, 5);
+  signed long long lin = averageLinear(5);
+  signed long long par = averageParallel(threads, 5);
+  if (!resLinear.isEqual(resParallel))
+    throw runtime_error("Results not equal!");
   printComparisons(lin, par);
 }
 
@@ -87,8 +94,10 @@ void Utils::test2(int threads) {
   int n = 1000, m = 1000;
   createFilter(5, 5);
   createMatrix(n, m, "test2.txt");
-  unsigned long long lin = averageLinear(5);
-  unsigned long long par = averageParallel(threads, 5);
+  signed long long lin = averageLinear(5);
+  signed long long par = averageParallel(threads, 5);
+  if (!resLinear.isEqual(resParallel))
+    throw runtime_error("Results not equal!");
   printComparisons(lin, par);
 }
 
@@ -97,8 +106,10 @@ void Utils::test3(int threads) {
   int n = 10, m = 10000;
   createFilter(5, 5);
   createMatrix(n, m, "test3.txt");
-  unsigned long long lin = averageLinear(5);
-  unsigned long long par = averageParallel(threads, 5);
+  signed long long lin = averageLinear(5);
+  signed long long par = averageParallel(threads, 5);
+  if (!resLinear.isEqual(resParallel))
+    throw runtime_error("Results not equal!");
   printComparisons(lin, par);
 }
 
@@ -107,12 +118,15 @@ void Utils::test4(int threads) {
   int n = 10000, m = 10;
   createFilter(5, 5);
   createMatrix(n, m, "test4.txt");
-  unsigned long long lin = averageLinear(5);
-  unsigned long long par = averageParallel(threads, 5);
+  signed long long lin = averageLinear(5);
+  signed long long par = averageParallel(threads, 5);
+  if (!resLinear.isEqual(resParallel))
+    throw runtime_error("Results not equal!");
   printComparisons(lin, par);
 }
 
-void Utils::printComparisons(int64_t linear, int64_t parallel) {
+void Utils::printComparisons(signed long long linear,
+                             signed long long parallel) {
   cout << "Linear=" << linear << "\n";
   cout << "Parallel=" << parallel << "\n";
   if (linear < parallel)
