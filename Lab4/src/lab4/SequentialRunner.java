@@ -10,6 +10,7 @@ import java.util.Vector;
 public class SequentialRunner {
 		private int nrPolynomials;
 		private Polynomial polynomial = new Polynomial();
+		private int maxElems = 0;
 		public SequentialRunner(int nrPolynomials) {
 				this.nrPolynomials = nrPolynomials;
 		}
@@ -28,6 +29,7 @@ public class SequentialRunner {
 								int grade = Integer.parseInt(elements[0]);
 								int coefficient = Integer.parseInt(elements[1]);
 								polynomial.addMonomial(new Monomial(grade, coefficient));
+								maxElems++;
 						}
 				} catch (IOException e) {
 						e.printStackTrace();

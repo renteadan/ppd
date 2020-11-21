@@ -5,30 +5,19 @@ public class QueueLinkedList<T extends Comparable<T>> {
 		Node<T> head;
 		Node<T> last;
 
+		QueueLinkedList() {
+				last = head = new Node<T>(null);
+		}
+
 		public void insert(T data) {
-				Node<T> newNode = new Node<>(data);
-				if(head == null) {
-						head = newNode;
-						last = newNode;
-						return;
-				}
-
-				if(last == head) {
-						last = newNode;
-						head.next = last;
-						return;
-				}
-
-				last.next = newNode;
+				last.next = new Node<>(data);
 				last = last.next;
 		}
 
-		public Node<T> remove(){
-				if(head == null){
-						return null;
-				}
-				Node<T> temp = head;
+		public T remove() {
 				head = head.next;
-				return temp;
+				T x = head.data;
+				head.data = null;
+				return x;
 		}
 }

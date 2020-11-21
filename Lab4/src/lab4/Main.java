@@ -5,20 +5,36 @@ import helpers.Helper;
 import java.util.Vector;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        int nrPolys = 1000, maxGrade = 10000, maxMonomials = 500, consumerThreads = 8, publisherThreads = 8;
-//        Main.rewrite(nrPolys, maxGrade, maxMonomials);
 
+    static Vector<Monomial> sequentialResult, parallelResult;
+    public static void main(String[] args) throws Exception {
+
+        IQueue<Monomial> queue = new BlockingQueueImpl<>();
+//        IQueue<Monomial> queue = new SyncQueue<>();
+        int maxGrade = 10000, maxMonomials = 500;
+//        Main.rewrite(nrPolys, maxGrade, maxMonomials);
+        Main.run(queue);
+    }
+
+    public static void rewrite(int nrPolynomials, int maxGrade, int maxMonomials) {
+        Helper helper = new Helper();
+        for(int i = 0; i< nrPolynomials; i++) {
+            helper.writePolynomial("polynoms/polinom"+i+".txt", maxGrade, maxMonomials);
+        }
+    }
+
+    public static void run(IQueue<Monomial> queue) throws Exception {
+        int nrPolys = 1000, consumerThreads = 8, publisherThreads = 1;
+        ThreadRunner threadRunner = new ThreadRunner(consumerThreads, publisherThreads, nrPolys, queue);
         long start_t = System.currentTimeMillis();
-        ThreadRunner threadRunner = new ThreadRunner(consumerThreads, publisherThreads, nrPolys);
-        Vector<Monomial> parallelResult = threadRunner.run();
+        parallelResult = threadRunner.runPool();
         long duration_p = System.currentTimeMillis() - start_t;
 
         System.out.println("Parallel: " + duration_p);
 
-        long start_s = System.currentTimeMillis();
         SequentialRunner sequentialRunner = new SequentialRunner(nrPolys);
-        Vector<Monomial> sequentialResult = sequentialRunner.run();
+        long start_s = System.currentTimeMillis();
+        sequentialResult = sequentialRunner.run();
         long duration_s = System.currentTimeMillis() - start_s;
 
         System.out.println("Sequential: " + duration_s);
@@ -40,13 +56,6 @@ public class Main {
             System.out.println("Parallel was faster with " + (duration_s - duration_p) + " milliseconds");
         } else {
             System.out.println("Sequential was faster with " + (duration_p - duration_s) + " milliseconds");
-        }
-    }
-
-    public static void rewrite(int nrPolynomials, int maxGrade, int maxMonomials) {
-        Helper helper = new Helper();
-        for(int i = 0; i< nrPolynomials; i++) {
-            helper.writePolynomial("polynoms/polinom"+i+".txt", maxGrade, maxMonomials);
         }
     }
 }

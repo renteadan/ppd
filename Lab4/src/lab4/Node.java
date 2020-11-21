@@ -8,6 +8,5 @@ public class Node<T> {
 		// Constructor
 		Node(T d) {
 				data = d;
-				next = null;
 		}
 }

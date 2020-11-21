@@ -141,7 +141,7 @@ public class Helper {
 								while(grades.contains(currentGrade)) {
 										currentGrade = r.nextInt(grade);
 								}
-								int mon = r.nextInt(100000);
+								int mon = r.nextInt(100000)+1;
 								writer.write(currentGrade + " " + mon + "\n");
 								grades.add(currentGrade);
 						}
