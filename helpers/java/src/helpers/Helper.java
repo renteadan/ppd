@@ -1,6 +1,7 @@
 package helpers;
 
 import java.io.*;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Vector;
 
@@ -122,5 +123,32 @@ public class Helper {
 								return false;
 				}
 				return true;
+		}
+
+		public void writePolynomial(String fileName, int maxGrade, int maxMonomials) {
+				HashSet<Integer> grades = new HashSet<>();
+				Random r = new Random();
+				int monomialsNr = r.nextInt(maxMonomials);
+				int grade = r.nextInt(maxGrade + 1);
+				while(grade < monomialsNr) {
+						grade = r.nextInt(maxGrade + 1);
+				}
+				grade++;
+				try {
+						FileWriter writer = new FileWriter(fileName, false);
+						for(int i=0;i<monomialsNr;i++) {
+								int currentGrade = r.nextInt(grade);
+								while(grades.contains(currentGrade)) {
+										currentGrade = r.nextInt(grade);
+								}
+								int mon = r.nextInt(100000);
+								writer.write(currentGrade + " " + mon + "\n");
+								grades.add(currentGrade);
+						}
+						writer.close();
+				} catch (IOException e) {
+						System.out.println("An error occurred.");
+						e.printStackTrace();
+				}
 		}
 }
