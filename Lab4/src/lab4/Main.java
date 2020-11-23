@@ -9,8 +9,8 @@ public class Main {
     static Vector<Monomial> sequentialResult, parallelResult;
     public static void main(String[] args) throws Exception {
 
-        IQueue<Monomial> queue = new BlockingQueueImpl<>();
-//        IQueue<Monomial> queue = new SyncQueue<>();
+//        IQueue<Monomial> queue = new BlockingQueueImpl<>();
+        IQueue<Monomial> queue = new SyncQueue<>();
         int maxGrade = 10000, maxMonomials = 500;
 //        Main.rewrite(nrPolys, maxGrade, maxMonomials);
         Main.run(queue);
@@ -24,10 +24,10 @@ public class Main {
     }
 
     public static void run(IQueue<Monomial> queue) throws Exception {
-        int nrPolys = 1000, consumerThreads = 8, publisherThreads = 1;
+        int nrPolys = 100, consumerThreads = 4, publisherThreads = 1;
         ThreadRunner threadRunner = new ThreadRunner(consumerThreads, publisherThreads, nrPolys, queue);
         long start_t = System.currentTimeMillis();
-        parallelResult = threadRunner.runPool();
+        parallelResult = threadRunner.run();
         long duration_p = System.currentTimeMillis() - start_t;
 
         System.out.println("Parallel: " + duration_p);

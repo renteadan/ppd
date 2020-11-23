@@ -13,12 +13,8 @@ public class SyncQueue<T extends Comparable<T>> implements IQueue<T> {
 		private final Condition notEmpty = addLock.newCondition();
 		private final ReentrantLock removeLock = new ReentrantLock();
 
-		/**
-		 * Signals a waiting take. Called only from put/offer (which do not
-		 * otherwise ordinarily lock takeLock.)
-		 */
-		private void signalNotEmpty() {
-				final ReentrantLock takeLock = this.addLock;
+		private void signal() {
+				ReentrantLock takeLock = this.addLock;
 				takeLock.lock();
 				notEmpty.signal();
 				takeLock.unlock();
@@ -26,20 +22,20 @@ public class SyncQueue<T extends Comparable<T>> implements IQueue<T> {
 
 		public SyncQueue(){}
 
-		public void addElement(T data) throws InterruptedException {
-				final int c;
-				removeLock.lockInterruptibly();
+		public void addElement(T data) {
+				int c;
+				removeLock.lock();
 				list.insert(data);
 				c = counter.getAndIncrement();
 				removeLock.unlock();
 				if(c == 0)
-					signalNotEmpty();
+					signal();
 		}
 
 		public T removeElement() throws InterruptedException {
-				final T data;
-				final int c;
-				addLock.lockInterruptibly();
+				T data;
+				int c;
+				addLock.lock();
 				while (counter.get() == 0) {
 						notEmpty.await();
 				}
