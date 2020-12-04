@@ -10,8 +10,8 @@ public class Main {
 	private static int nrPolys = 100000;
 	public static void main(String[] args) throws Exception {
 
-		int maxGrade = 100000, maxMonomials = 5000;
-        Main.rewrite(nrPolys, maxGrade, maxMonomials);
+		int maxGrade = 10000, maxMonomials = 500;
+//        Main.rewrite(nrPolys, maxGrade, maxMonomials);
 		Main.run();
 	}
 
@@ -25,9 +25,9 @@ public class Main {
 	public static long runTimesParallel(int times) throws InterruptedException {
 		long total = 0;
 		for(int i=0;i<times;i++) {
-			Exchange exchange = new Exchange();
+			Exchange exchange = new Exchange(2);
 			int consumerThreads = 4;
-			int publisherThreads = 1;
+			int publisherThreads = 4;
 			ThreadRunner threadRunner = new ThreadRunner(consumerThreads, publisherThreads, nrPolys, exchange);
 			long start = System.currentTimeMillis();
 			parallelResult = threadRunner.runPool();
@@ -53,7 +53,7 @@ public class Main {
 		long duration_p = Main.runTimesParallel(5);
 		System.out.println("Parallel: " + duration_p);
 
-		long duration_s = Main.runTimesSeq(5);
+		long duration_s = Main.runTimesSeq(1);
 
 		System.out.println("Sequential: " + duration_s);
 
