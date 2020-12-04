@@ -7,13 +7,12 @@ import java.util.Vector;
 public class Main {
 
     static Vector<Monomial> sequentialResult, parallelResult;
+    private static int nrPolys = 1000;
     public static void main(String[] args) throws Exception {
 
-//        IQueue<Monomial> queue = new BlockingQueueImpl<>();
-        IQueue<Monomial> queue = new SyncQueue<>();
         int maxGrade = 10000, maxMonomials = 500;
 //        Main.rewrite(nrPolys, maxGrade, maxMonomials);
-        Main.run(queue);
+        Main.run();
     }
 
     public static void rewrite(int nrPolynomials, int maxGrade, int maxMonomials) {
@@ -23,19 +22,38 @@ public class Main {
         }
     }
 
-    public static void run(IQueue<Monomial> queue) throws Exception {
-        int nrPolys = 100, consumerThreads = 4, publisherThreads = 1;
-        ThreadRunner threadRunner = new ThreadRunner(consumerThreads, publisherThreads, nrPolys, queue);
-        long start_t = System.currentTimeMillis();
-        parallelResult = threadRunner.run();
-        long duration_p = System.currentTimeMillis() - start_t;
+    public static long runTimesParallel(int times) throws InterruptedException {
+        long total = 0;
+        for(int i=0;i<times;i++) {
+            IQueue<Monomial> queue = new SyncQueue<>();
+            int consumerThreads = 12;
+            int publisherThreads = 4;
+            ThreadRunner threadRunner = new ThreadRunner(consumerThreads, publisherThreads, nrPolys, queue);
+            long start = System.currentTimeMillis();
+            parallelResult = threadRunner.runPool();
+            long duration = System.currentTimeMillis() - start;
+            total+=duration;
+        }
+        return total / times;
+    }
 
+    public static long runTimesSeq(int times) {
+        long total = 0;
+        for(int i=0;i<times;i++) {
+            SequentialRunner sequentialRunner = new SequentialRunner(nrPolys);
+            long start = System.currentTimeMillis();
+            sequentialResult = sequentialRunner.run();
+            long duration = System.currentTimeMillis() - start;
+            total+=duration;
+        }
+        return total / times;
+    }
+
+    public static void run() throws Exception {
+        long duration_p = Main.runTimesParallel(5);
         System.out.println("Parallel: " + duration_p);
 
-        SequentialRunner sequentialRunner = new SequentialRunner(nrPolys);
-        long start_s = System.currentTimeMillis();
-        sequentialResult = sequentialRunner.run();
-        long duration_s = System.currentTimeMillis() - start_s;
+        long duration_s = Main.runTimesSeq(5);
 
         System.out.println("Sequential: " + duration_s);
 

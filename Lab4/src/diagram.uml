@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="936.5486858480501" y="835.0">lab4.BlockingQueueImpl</node>
+    <node x="471.5486858480501" y="845.0">lab4.ThreadConsumer</node>
+    <node x="232.0070191813835" y="834.0">lab4.SequentialRunner</node>
+    <node x="1269.988079787444" y="157.0">lab4.QueueLinkedList</node>
+    <node x="33.125" y="428.0">lab4.MonomialLinkedList</node>
+    <node x="1228.2585978757588" y="780.0">lab4.SyncQueue</node>
+    <node x="0.0" y="147.0">lab4.SortedLinkedList</node>
+    <node x="979.2489824911434" y="541.0">lab4.IQueue</node>
+    <node x="132.5" y="0.0">lab4.Node</node>
+    <node x="722.5486858480501" y="856.0">lab4.ThreadPublisher</node>
+    <node x="894.1239824911435" y="1558.0">lab4.Main</node>
+    <node x="677.1166666666666" y="135.0">lab4.Monomial</node>
+    <node x="335.00701918138344" y="531.0">lab4.Polynomial</node>
+    <node x="611.3878713800323" y="1151.0">lab4.ThreadRunner</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="lab4.MonomialLinkedList" target="lab4.Node">
+      <point x="29.25" y="-26.5" />
+      <point x="179.375" y="408.0" />
+      <point x="195.5" y="408.0" />
+      <point x="0.0" y="37.5" />
+    </edge>
+    <edge source="lab4.Main" target="lab4.Monomial">
+      <point x="45.562499999999886" y="-91.5" />
+      <point x="1061.1864824911434" y="1518.0" />
+      <point x="1196.3214131207774" y="1518.0" />
+      <point x="1196.3214131207774" y="388.0" />
+      <point x="844.3089743589743" y="388.0" />
+      <point x="72.69230769230774" y="91.5" />
+    </edge>
+    <edge source="lab4.ThreadRunner" target="lab4.ThreadPublisher">
+      <point x="0.0" y="-168.5" />
+      <point x="754.8878713800323" y="1131.0" />
+      <point x="771.0486858480501" y="1131.0" />
+      <point x="-48.5" y="69.5" />
+    </edge>
+    <edge source="lab4.Main" target="lab4.IQueue">
+      <point x="15.187499999999886" y="-91.5" />
+      <point x="1030.8114824911434" y="1508.0" />
+      <point x="1185.3214131207774" y="1508.0" />
+      <point x="1185.3214131207774" y="740.0" />
+      <point x="1105.91564915781" y="740.0" />
+      <point x="50.66666666666674" y="69.5" />
+    </edge>
+    <edge source="lab4.SortedLinkedList" target="lab4.Node">
+      <point x="-61.66666666666666" y="-79.5" />
+      <point x="30.83333333333337" y="95.0" />
+      <point x="141.5" y="95.0" />
+      <point x="-54.0" y="37.5" />
+    </edge>
+    <edge source="lab4.QueueLinkedList" target="lab4.Node">
+      <point x="38.25" y="-69.5" />
+      <point x="1384.738079787444" y="95.0" />
+      <point x="249.5" y="95.0" />
+      <point x="54.0" y="37.5" />
+    </edge>
+    <edge source="lab4.ThreadRunner" target="lab4.Polynomial">
+      <point x="-104.36363636363637" y="-168.5" />
+      <point x="650.5242350163959" y="1121.0" />
+      <point x="450.5070191813835" y="1121.0" />
+      <point x="450.5070191813835" y="760.0" />
+      <point x="463.3403525147168" y="760.0" />
+      <point x="18.33333333333337" y="79.5" />
+    </edge>
+    <edge source="lab4.ThreadConsumer" target="lab4.Polynomial">
+      <point x="-96.25" y="-80.5" />
+      <point x="490.7986858480501" y="760.0" />
+      <point x="500.00701918138344" y="760.0" />
+      <point x="55.0" y="79.5" />
+    </edge>
+    <edge source="lab4.ThreadConsumer" target="lab4.IQueue">
+      <point x="96.25" y="-80.5" />
+      <point x="683.2986858480501" y="730.0" />
+      <point x="1004.5823158244766" y="730.0" />
+      <point x="-50.66666666666674" y="69.5" />
+    </edge>
+    <edge source="lab4.SyncQueue" target="lab4.QueueLinkedList">
+      <point x="64.33333333333326" y="-145.5" />
+      <point x="1389.0919312090919" y="760.0" />
+      <point x="1344.4814606297655" y="760.0" />
+      <point x="1344.4814606297655" y="408.0" />
+      <point x="1384.738079787444" y="408.0" />
+      <point x="38.25" y="69.5" />
+    </edge>
+    <edge source="lab4.ThreadPublisher" target="lab4.IQueue">
+      <point x="38.799999999999955" y="-69.5" />
+      <point x="858.3486858480501" y="740.0" />
+      <point x="1021.4712047133655" y="740.0" />
+      <point x="-33.77777777777783" y="69.5" />
+    </edge>
+    <edge source="lab4.BlockingQueueImpl" target="lab4.IQueue">
+      <point x="0.0" y="-90.5" />
+      <point x="1030.5486858480501" y="760.0" />
+      <point x="1055.2489824911434" y="760.0" />
+      <point x="0.0" y="69.5" />
+    </edge>
+    <edge source="lab4.SyncQueue" target="lab4.IQueue">
+      <point x="-64.33333333333326" y="-145.5" />
+      <point x="1260.4252645424253" y="730.0" />
+      <point x="1122.804538046699" y="730.0" />
+      <point x="67.55555555555566" y="69.5" />
+    </edge>
+    <edge source="lab4.Polynomial" target="lab4.Monomial">
+      <point x="82.5" y="-79.5" />
+      <point x="527.5070191813834" y="511.0" />
+      <point x="520.7558521986488" y="511.0" />
+      <point x="520.7558521986488" y="368.0" />
+      <point x="728.0012820512819" y="368.0" />
+      <point x="-43.61538461538464" y="91.5" />
+    </edge>
+    <edge source="lab4.MonomialLinkedList" target="lab4.Monomial">
+      <point x="87.75" y="-26.5" />
+      <point x="237.875" y="338.0" />
+      <point x="684.3858974358973" y="338.0" />
+      <point x="-87.23076923076928" y="91.5" />
+    </edge>
+    <edge source="lab4.Main" target="lab4.SyncQueue">
+      <point x="106.31249999999989" y="-91.5" />
+      <point x="1121.9364824911434" y="1538.0" />
+      <point x="1324.7585978757588" y="1538.0" />
+      <point x="0.0" y="145.5" />
+    </edge>
+    <edge source="lab4.SequentialRunner" target="lab4.Monomial">
+      <point x="-24.625" y="-91.5" />
+      <point x="305.8820191813835" y="760.0" />
+      <point x="288.625" y="760.0" />
+      <point x="288.625" y="358.0" />
+      <point x="713.4628205128204" y="358.0" />
+      <point x="-58.15384615384619" y="91.5" />
+    </edge>
+    <edge source="lab4.ThreadConsumer" target="lab4.Monomial">
+      <point x="19.25" y="-80.5" />
+      <point x="606.2986858480501" y="760.0" />
+      <point x="592.5486858480501" y="760.0" />
+      <point x="592.5486858480501" y="388.0" />
+      <point x="757.078205128205" y="388.0" />
+      <point x="-14.538461538461547" y="91.5" />
+    </edge>
+    <edge source="lab4.ThreadRunner" target="lab4.IQueue">
+      <point x="52.18181818181813" y="-168.5" />
+      <point x="807.0696895618504" y="1101.0" />
+      <point x="1135.0486858480501" y="1101.0" />
+      <point x="1135.0486858480501" y="760.0" />
+      <point x="1072.1378713800323" y="760.0" />
+      <point x="16.888888888888914" y="69.5" />
+    </edge>
+    <edge source="lab4.ThreadPublisher" target="lab4.Monomial">
+      <point x="0.0" y="-69.5" />
+      <point x="819.5486858480501" y="710.0" />
+      <point x="793.6166666666666" y="710.0" />
+      <point x="793.6166666666666" y="408.0" />
+      <point x="800.6935897435897" y="408.0" />
+      <point x="29.076923076923094" y="91.5" />
+    </edge>
+    <edge source="lab4.MonomialLinkedList" target="lab4.SortedLinkedList">
+      <point x="-29.25" y="-26.5" />
+      <point x="120.875" y="408.0" />
+      <point x="138.75" y="408.0" />
+      <point x="46.25" y="79.5" />
+    </edge>
+    <edge source="lab4.Main" target="lab4.ThreadRunner">
+      <point x="-45.562500000000114" y="-91.5" />
+      <point x="970.0614824911434" y="1518.0" />
+      <point x="683.1378713800323" y="1518.0" />
+      <point x="-71.75" y="168.5" />
+    </edge>
+    <edge source="lab4.ThreadRunner" target="lab4.Monomial">
+      <point x="130.45454545454538" y="-168.5" />
+      <point x="885.3424168345776" y="1131.0" />
+      <point x="1172.7489824911434" y="1131.0" />
+      <point x="1172.7489824911434" y="398.0" />
+      <point x="829.7705128205127" y="398.0" />
+      <point x="58.15384615384619" y="91.5" />
+    </edge>
+    <edge source="lab4.ThreadRunner" target="lab4.ThreadConsumer">
+      <point x="-78.27272727272725" y="-168.5" />
+      <point x="676.615144107305" y="1111.0" />
+      <point x="510.0486858480501" y="1111.0" />
+      <point x="-77.0" y="80.5" />
+    </edge>
+    <edge source="lab4.Polynomial" target="lab4.Node">
+      <point x="27.5" y="-79.5" />
+      <point x="472.50701918138344" y="511.0" />
+      <point x="494.50701918138344" y="511.0" />
+      <point x="494.50701918138344" y="115.0" />
+      <point x="213.5" y="115.0" />
+      <point x="18.0" y="37.5" />
+    </edge>
+    <edge source="lab4.Main" target="lab4.SequentialRunner">
+      <point x="-106.31250000000011" y="-91.5" />
+      <point x="909.3114824911434" y="1538.0" />
+      <point x="310.71418553198214" y="1538.0" />
+      <point x="310.71418553198214" y="1131.0" />
+      <point x="281.2570191813835" y="1131.0" />
+      <point x="-49.25" y="91.5" />
+    </edge>
+    <edge source="lab4.SequentialRunner" target="lab4.Polynomial">
+      <point x="24.625" y="-91.5" />
+      <point x="355.1320191813835" y="760.0" />
+      <point x="353.3403525147168" y="760.0" />
+      <point x="-91.66666666666663" y="79.5" />
+    </edge>
+    <edge source="lab4.Polynomial" target="lab4.MonomialLinkedList">
+      <point x="-82.5" y="-79.5" />
+      <point x="362.50701918138344" y="511.0" />
+      <point x="91.625" y="511.0" />
+      <point x="-58.5" y="26.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5088018171493469" x="718.5" y="900.5000000000001" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
