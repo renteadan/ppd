@@ -7,7 +7,7 @@ import java.util.Vector;
 public class Main {
 
 	static Vector<Monomial> sequentialResult, parallelResult;
-	private static int nrPolys = 100000;
+	private static int nrPolys = 10000;
 	public static void main(String[] args) throws Exception {
 
 		int maxGrade = 10000, maxMonomials = 500;

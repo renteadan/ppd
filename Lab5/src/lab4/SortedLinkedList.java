@@ -1,7 +1,6 @@
 package lab4;
 
 import java.util.Vector;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class SortedLinkedList<T extends Comparable<T>> {
 
@@ -12,20 +11,28 @@ public class SortedLinkedList<T extends Comparable<T>> {
 		// so that main() can access i
 
 		// Method to insert a new node
-		public synchronized void insert(T data) {
+		public void insert(T data) {
 			Node<T> newNode = new Node<>(data);
 			Node<T> current = head;
 			Node<T> previous = null;
-			while(current != null && data.compareTo(current.data) > 0){
-				previous = current;
-				current = current.next;
+			synchronized (this) {
+				if(current == null) {
+					head = newNode;
+					return;
+				}
 			}
-			if(previous == null){
-				head = newNode;
-			} else {
+			synchronized (current) {
+				while(current != null && data.compareTo(current.data) > 0){
+					previous = current;
+					current = current.next;
+				}
+				if(previous == null){
+					head = newNode;
+				} else {
 					previous.next = newNode;
+				}
+				newNode.next = current;
 			}
-			newNode.next = current;
 		}
 
 		public Node<T> getElement(int pos) {
