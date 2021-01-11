@@ -196,8 +196,7 @@ void runTest(int argc, char **argv) {
   sdkStartTimer(&timer);
 
   // Execute the kernel
-  d_render<<<numBlocks, threadsPerBlock>>>(dData, width, height, tx, ty, scale,
-                                           cx, cy, tex);
+  d_render<<<numBlocks, threadsPerBlock>>>(dData, width, height, tx, ty, scale,cx, cy, tex);
 
   // Check if kernel execution generated an error
   getLastCudaError("Kernel execution failed");
